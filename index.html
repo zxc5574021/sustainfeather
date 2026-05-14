@@ -1,256 +1,379 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>永續羽林 Sustainable Yulin｜生物循環經濟解方</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft JhengHei","Heiti TC",sans-serif;scroll-behavior:smooth}
-body{color:#333;line-height:1.7}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SustainFeather 永續羽林｜黑水虻賦能的零廢棄循環計畫</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap');
+        
+        body {
+            font-family: 'Noto Sans TC', sans-serif;
+            scroll-behavior: smooth;
+            color: #333;
+        }
 
-/* 導覽列 */
-header{background:#1a5f3a;color:white;padding:1rem 5%;position:fixed;width:100%;top:0;z-index:999;box-shadow:0 2px 12px rgba(0,0,0,0.1);transition:0.3s}
-.navbar{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:auto}
-.logo{font-size:1.4rem;font-weight:700}
-.logo span{color:#8cc63f}
-.nav-links{display:flex;gap:2.2rem}
-.nav-links a{color:white;text-decoration:none;font-weight:500;transition:0.3s}
-.nav-links a:hover{color:#8cc63f}
-.mobile-menu-btn{display:none;background:none;border:none;color:white;font-size:1.5rem;cursor:pointer}
+        .hero-bg {
+            background: linear-gradient(rgba(26, 95, 58, 0.85), rgba(26, 95, 58, 0.8)), 
+                        url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
 
-/* 手機選單 */
-@media(max-width:768px){
-  .nav-links{display:none;flex-direction:column;background:#1a5f3a;position:absolute;top:70px;left:0;width:100%;padding:1.5rem 5%}
-  .nav-links.active{display:flex}
-  .mobile-menu-btn{display:block}
-}
+        .section-title {
+            color: #1a5f3a;
+            position: relative;
+            padding-bottom: 1rem;
+        }
 
-/* 英雄區 */
-.hero{background:linear-gradient(rgba(26,95,58,0.85),rgba(26,95,58,0.8)),url('https://picsum.photos/id/1052/1920/700');background-size:cover;background-position:center;color:white;text-align:center;padding:160px 2rem 100px;margin-top:70px}
-.hero h1{font-size:2.4rem;margin-bottom:1rem;animation:fadeUp 1s ease}
-.hero p{font-size:1.1rem;max-width:800px;margin:auto auto 2.5rem;animation:fadeUp 1.2s ease}
-.btn{display:inline-block;background:#8cc63f;color:white;padding:12px 32px;border-radius:50px;text-decoration:none;font-weight:700;transition:0.3s;animation:fadeUp 1.4s ease}
-.btn:hover{background:#6da32f;transform:translateY(-3px)}
-@keyframes fadeUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #8cc63f;
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
 
-/* 容器 */
-.container{max-width:1200px;margin:auto;padding:0 2rem}
-.section{padding:5rem 2rem}
-.section-title{text-align:center;margin-bottom:3rem;color:#1a5f3a;font-size:2rem}
-.section-title::after{content:'';display:block;width:70px;height:4px;background:#8cc63f;margin:10px auto;border-radius:2px}
+        .card-custom {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.05);
+            border-top: 4px solid #1a5f3a;
+            transition: 0.3s;
+        }
 
-/* 卡片通用 */
-.card-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;margin-top:2rem}
-.card{background:white;border-radius:12px;padding:2rem;box-shadow:0 6px 18px rgba(0,0,0,0.05);border-top:4px solid #1a5f3a;transition:0.3s}
-.card:hover{transform:translateY(-6px);box-shadow:0 12px 24px rgba(0,0,0,0.08)}
-.card h3{color:#1a5f3a;margin-bottom:1rem;font-size:1.2rem}
+        .card-custom:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.08);
+        }
 
-/* 對比表 */
-.comparison{background:#f7f9f7}
-.comparison-table{width:100%;border-collapse:collapse;background:white;border-radius:12px;overflow:hidden;box-shadow:0 6px 16px rgba(0,0,0,0.05)}
-.comparison-table th,.comparison-table td{padding:1.2rem;text-align:center}
-.comparison-table th{background:#1a5f3a;color:white}
-.comparison-table tr:nth-child(even){background:#f9f9f9}
-.highlight{background:#e6f4ea;font-weight:700;color:#1a5f3a}
+        /* 流程圖步驟 */
+        .flow-step {
+            background: #e6f4ea;
+            color: #1a5f3a;
+            padding: 1rem;
+            border-radius: 8px;
+            width: 140px;
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+        }
 
-/* 流程圖 */
-.flow{display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;margin:2rem 0;text-align:center}
-.flow-step{background:#e6f4ea;color:#1a5f3a;padding:1rem;border-radius:8px;width:120px;font-weight:700}
+        /* 對比表樣式 */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.05);
+        }
 
-/* 表單 */
-.contact-form{max-width:600px;margin:auto;background:white;padding:2.5rem;border-radius:12px;box-shadow:0 6px 18px rgba(0,0,0,0.06)}
-.form-group{margin-bottom:1.2rem}
-.form-group label{display:block;margin-bottom:0.5rem;font-weight:500;color:#1a5f3a}
-.form-group input,.form-group textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:6px;font-size:1rem}
-.form-group textarea{height:120px}
-.submit-btn{background:#1a5f3a;color:white;border:none;padding:12px 30px;border-radius:6px;font-weight:700;cursor:pointer;transition:0.3s;width:100%}
-.submit-btn:hover{background:#0f3b24}
+        .comparison-table th {
+            background: #1a5f3a;
+            color: white;
+            padding: 1.2rem;
+        }
 
-/* 聯絡區 */
-.contact{background:#1a5f3a;color:white;padding:5rem 2rem;text-align:center}
-.contact .section-title{color:white}
-.contact-info{margin:2rem 0;font-size:1.1rem}
+        .comparison-table td {
+            padding: 1.2rem;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+        }
 
-/* 頁腳 */
-footer{background:#0f3b24;color:white;text-align:center;padding:2rem;font-size:0.9rem}
-</style>
+        .highlight-row {
+            background: #e6f4ea;
+            font-weight: 700;
+            color: #1a5f3a;
+        }
+
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+        }
+    </style>
 </head>
-<body>
+<body class="bg-slate-50">
 
-<!-- 導覽列 -->
-<header>
-  <div class="navbar">
-    <div class="logo">永續羽林 <span>Sustainable Yulin</span></div>
-    <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-    <div class="nav-links" id="navLinks">
-      <a href="#home">首頁</a>
-      <a href="#pain">產業痛點</a>
-      <a href="#solution">解決方案</a>
-      <a href="#compare">方案對比</a>
-      <a href="#pillar">三大支柱</a>
-      <a href="#contact">聯絡我們</a>
-    </div>
-  </div>
-</header>
+    <!-- 導覽列 -->
+    <nav class="fixed w-full z-50 glass-nav border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-[#1a5f3a] rounded-lg flex items-center justify-center shadow-lg">
+                        <i class="fas fa-leaf text-[#8cc63f]"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-bold text-[#1a5f3a] tracking-tight">永續羽林</span>
+                        <span class="text-[9px] block font-bold text-[#8cc63f] tracking-widest uppercase -mt-1">SustainFeather</span>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 font-semibold text-gray-600 text-sm">
+                    <a href="#home" class="hover:text-[#8cc63f] transition">首頁</a>
+                    <a href="#pain" class="hover:text-[#8cc63f] transition">產業痛點</a>
+                    <a href="#solution" class="hover:text-[#8cc63f] transition">解決方案</a>
+                    <a href="#compare" class="hover:text-[#8cc63f] transition">方案對比</a>
+                    <a href="#pillar" class="hover:text-[#8cc63f] transition">三大支柱</a>
+                    <a href="#contact" class="bg-[#1a5f3a] text-white px-5 py-2 rounded-full hover:bg-opacity-90 transition">立即諮詢</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-<!-- 首頁 -->
-<section class="hero" id="home">
-  <div class="container">
-    <h1>從剩食到餐桌：黑水虻賦能的零廢棄循環計畫</h1>
-    <p>以生物技術為核心的企業ESG循環數據與碳資產管理解決方案，重塑廢棄物價值，羽化永續未來。</p>
-    <a href="#contact" class="btn">立即諮詢合作</a>
-  </div>
-</section>
+    <!-- 英雄區塊 -->
+    <section id="home" class="hero-bg min-h-screen flex items-center text-white pt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6" data-aos="fade-up">從剩食到餐桌：<br>黑水虻賦能的零廢棄循環計畫</h1>
+            <p class="text-lg md:text-xl text-emerald-50/80 mb-10 max-w-3xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+                以生物技術為核心的企業 ESG 循環數據與碳資產管理解決方案，<br class="hidden md:block">重塑廢棄物價值，羽化永續未來。
+            </p>
+            <div class="flex justify-center space-x-4" data-aos="fade-up" data-aos-delay="400">
+                <a href="#contact" class="bg-[#8cc63f] text-[#1a5f3a] px-8 py-3 rounded-full font-bold hover:bg-white transition-all shadow-lg">立即諮詢合作</a>
+                <a href="#solution" class="border border-white/30 backdrop-blur-md px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-all">了解更多</a>
+            </div>
+        </div>
+    </section>
 
-<!-- 產業痛點 -->
-<section class="section" id="pain">
-  <div class="container">
-    <h2 class="section-title">傳統廢棄物處置已無法滿足現代綠色供應鏈標準</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>財務端：清運預算失控</h3>
-        <p>傳統處理規費逐年調漲，企業廢棄物清運預算高度不確定，難以長期財務控管。</p>
-      </div>
-      <div class="card">
-        <h3>合規端：ESG數據空洞</h3>
-        <p>上市櫃需編撰GRI/SASB永續報告，但傳統清運無法提供可量化減碳與循環數據。</p>
-      </div>
-      <div class="card">
-        <h3>環境端：高碳排問題</h3>
-        <p>焚化碳排過高、傳統堆肥耗時3–6個月，無法達成企業零廢棄永續指標。</p>
-      </div>
-    </div>
-  </div>
-</section>
+    <!-- 產業痛點 -->
+    <section id="pain" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center section-title mb-16" data-aos="fade-up">傳統廢棄物處置已無法滿足現代綠色供應鏈標準</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-custom" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-red-50 text-red-600 rounded-full flex items-center justify-center mb-6"><i class="fas fa-sack-dollar text-xl"></i></div>
+                    <h3 class="text-xl font-bold text-[#1a5f3a] mb-4">財務端：清運預算失控</h3>
+                    <p class="text-gray-500 text-sm">傳統處理規費逐年調漲，企業廢棄物清運預算高度不確定，難以長期財務控管。</p>
+                </div>
+                <div class="card-custom" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-full flex items-center justify-center mb-6"><i class="fas fa-file-contract text-xl"></i></div>
+                    <h3 class="text-xl font-bold text-[#1a5f3a] mb-4">合規端：ESG數據空洞</h3>
+                    <p class="text-gray-500 text-sm">上市櫃需編撰 GRI/SASB 永續報告，但傳統清運無法提供可量化減碳與循環數據。</p>
+                </div>
+                <div class="card-custom" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-emerald-50 text-emerald-600 rounded-full flex items-center justify-center mb-6"><i class="fas fa-cloud-showers-heavy text-xl"></i></div>
+                    <h3 class="text-xl font-bold text-[#1a5f3a] mb-4">環境端：高碳排問題</h3>
+                    <p class="text-gray-500 text-sm">焚化碳排過高、傳統堆肥耗時 3–6 個月，無法達成企業零廢棄永續指標。</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- 解決方案 -->
-<section class="section" id="solution" style="background:#f7f9f7">
-  <div class="container">
-    <h2 class="section-title">生物引擎 × 數位追蹤：把痛點轉為綠色資產</h2>
-    <div style="text-align:center;margin-bottom:2rem">
-      <p style="font-size:1.1rem;max-width:800px;margin:auto">廢棄物管理（實體）＋數據科學（數位）＝企業綠色資產</p>
-    </div>
-    <div class="flow">
-      <div class="flow-step">廚餘進場</div>
-      <div class="flow-step">自動養殖</div>
-      <div class="flow-step">無污染分離</div>
-      <div class="flow-step">高值化產出</div>
-    </div>
-    <div class="card-grid" style="margin-top:3rem">
-      <div class="card">
-        <h3>14天極速轉化</h3>
-        <p>閉環生態系、零污染、全程IoT即時監控，數據透明可追溯。</p>
-      </div>
-      <div class="card">
-        <h3>ESG數位監測</h3>
-        <p>自動生成精確碳減量實績，對接ISO 50001、GRI、SASB國際標準。</p>
-      </div>
-      <div class="card">
-        <h3>高價值產出</h3>
-        <p>永續蛋白質飼料＋高品質有機肥，實現資源全循環再利用。</p>
-      </div>
-    </div>
-    <p style="text-align:center;margin-top:3rem;font-weight:700;color:#1a5f3a;font-size:1.1rem">
-      永續羽林不只是處理過去的廢棄物，而是為企業創造未來的綠色資產。
-    </p>
-  </div>
-</section>
+    <!-- 解決方案與流程 -->
+    <section id="solution" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center section-title mb-16" data-aos="fade-up">生物引擎 × 數位追蹤：把痛點轉為綠色資產</h2>
+            
+            <div class="flex flex-wrap justify-center gap-4 mb-16" data-aos="fade-up">
+                <div class="flow-step">廚餘進場 <i class="fas fa-arrow-right absolute -right-4 top-1/2 -translate-y-1/2 text-gray-300 hidden md:block"></i></div>
+                <div class="flow-step">自動養殖 <i class="fas fa-arrow-right absolute -right-4 top-1/2 -translate-y-1/2 text-gray-300 hidden md:block"></i></div>
+                <div class="flow-step">無污染分離 <i class="fas fa-arrow-right absolute -right-4 top-1/2 -translate-y-1/2 text-gray-300 hidden md:block"></i></div>
+                <div class="flow-step">高值化產出</div>
+            </div>
 
-<!-- 方案對比 -->
-<section class="section comparison" id="compare">
-  <div class="container">
-    <h2 class="section-title">突破傳統瓶頸：全方位永續解方</h2>
-    <table class="comparison-table">
-      <tr><th>項目</th><th>傳統堆肥</th><th>傳統焚化</th><th>永續羽林</th></tr>
-      <tr><td>處理時間</td><td>3–6個月</td><td>快速</td><td class="highlight">14天</td></tr>
-      <tr><td>碳排表現</td><td>產生甲烷</td><td>極高碳排</td><td class="highlight">極低能耗．零廢棄</td></tr>
-      <tr><td>產物價值</td><td>低價肥料</td><td>灰渣無價值</td><td class="highlight">高蛋白飼料＋有機肥</td></tr>
-      <tr><td>ESG數據</td><td>無</td><td>難量化</td><td class="highlight">雲端儀表板．GRI/SASB適用</td></tr>
-    </table>
-  </div>
-</section>
+            <div class="grid md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100" data-aos="fade-up" data-aos-delay="100">
+                    <h4 class="font-bold text-[#1a5f3a] mb-4 text-lg"><i class="fas fa-bolt text-[#8cc63f] mr-2"></i>14天極速轉化</h4>
+                    <p class="text-sm text-gray-500">閉環生態系、零污染、全程 IoT 即時監控，數據透明可追溯。</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100" data-aos="fade-up" data-aos-delay="200">
+                    <h4 class="font-bold text-[#1a5f3a] mb-4 text-lg"><i class="fas fa-chart-pie text-[#8cc63f] mr-2"></i>ESG數位監測</h4>
+                    <p class="text-sm text-gray-500">自動生成精確碳減量實績，對接 ISO 50001、GRI、SASB 國際標準。</p>
+                </div>
+                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100" data-aos="fade-up" data-aos-delay="300">
+                    <h4 class="font-bold text-[#1a5f3a] mb-4 text-lg"><i class="fas fa-box-open text-[#8cc63f] mr-2"></i>高價值產出</h4>
+                    <p class="text-sm text-gray-500">永續蛋白質飼料＋高品質有機肥，實現資源全循環再利用。</p>
+                </div>
+            </div>
 
-<!-- 三大支柱 -->
-<section class="section" id="pillar">
-  <div class="container">
-    <h2 class="section-title">企業賦能三大支柱</h2>
-    <div class="card-grid">
-      <div class="card">
-        <h3>經濟面｜成本與風險控管</h3>
-        <p>提供 10元/kg 長期固定單價，簽署避險契約，鎖定長期營運成本，不受環保規費波動影響。</p>
-      </div>
-      <div class="card">
-        <h3>數位面｜合規數據賦能</h3>
-        <p>專屬ESG數位監測平台，一鍵匯出標準報告素材，解決永續報告編撰痛點。</p>
-      </div>
-      <div class="card">
-        <h3>形象面｜品牌與員工體驗</h3>
-        <p>從餐桌到餐桌員工體驗、有機品回饋，建立由內而外的永續標竿形象。</p>
-      </div>
-    </div>
-  </div>
-</section>
+            <p class="text-center font-bold text-[#1a5f3a] text-xl" data-aos="fade-up">
+                SustainFeather 不只是處理過去的廢棄物，而是為企業創造未來的綠色資產。
+            </p>
+        </div>
+    </section>
 
-<!-- 核心優勢 -->
-<section class="section" style="background:#f7f9f7">
-  <div class="container">
-    <h2 class="section-title">四大護城河．高行業門檻</h2>
-    <div class="card-grid">
-      <div class="card"><h3>核心生物技術</h3><p>穩定黑水虻育種、全自動養殖設備</p></div>
-      <div class="card"><h3>數位數據合規</h3><p>ISO 50001團隊、IoT碳足跡追蹤</p></div>
-      <div class="card"><h3>特許營運門檻</h3><p>合法清除許可、專屬減碳計算方法</p></div>
-      <div class="card"><h3>品牌信譽資產</h3><p>官方背書、實體回饋、高客戶黏著</p></div>
-    </div>
-  </div>
-</section>
+    <!-- 方案對比表 -->
+    <section id="compare" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center section-title mb-16" data-aos="fade-up">突破傳統瓶頸：全方位永續解方</h2>
+            <div class="overflow-x-auto" data-aos="fade-up">
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>項目</th>
+                            <th>傳統堆肥</th>
+                            <th>傳統焚化</th>
+                            <th class="bg-[#8cc63f] text-[#1a5f3a]">SustainFeather</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td class="font-bold">處理時間</td>
+                            <td>3–6個月</td>
+                            <td>快速</td>
+                            <td class="highlight-row">14天</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">碳排表現</td>
+                            <td>產生甲烷</td>
+                            <td>極高碳排</td>
+                            <td class="highlight-row">極低能耗．零廢棄</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">產物價值</td>
+                            <td>低價肥料</td>
+                            <td>灰渣無價值</td>
+                            <td class="highlight-row">高蛋白飼料＋有機肥</td>
+                        </tr>
+                        <tr>
+                            <td class="font-bold">ESG數據</td>
+                            <td>無</td>
+                            <td>難量化</td>
+                            <td class="highlight-row">雲端儀表板．GRI/SASB適用</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
-<!-- 願景 -->
-<section class="section">
-  <div class="container" style="text-align:center">
-    <h2 class="section-title">成為台灣企業ESG轉型的永續羽翼</h2>
-    <p style="max-width:700px;margin:auto;font-size:1.1rem">
-      <strong>近期目標：</strong>鎖定核心高產值工業區建立零廢棄標竿，快速複製成功模式。<br><br>
-      <strong>長期願景：</strong>整合顧問聯盟、推動綠色金融與數據授權，成為最具公信力的永續基石。
-    </p>
-    <p style="margin-top:2rem;font-style:italic;color:#1a5f3a;font-weight:700">讓我們一起羽化資源，守護綠意</p>
-  </div>
-</section>
+    <!-- 三大支柱 -->
+    <section id="pillar" class="py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center section-title mb-16" data-aos="fade-up">企業賦能三大支柱</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="card-custom" data-aos="fade-up" data-aos-delay="100">
+                    <h3 class="text-xl font-bold text-[#1a5f3a] mb-4">經濟面｜成本與風險控管</h3>
+                    <p class="text-gray-500 text-sm">提供 10元/kg 長期固定單價，簽署避險契約，鎖定長期營運成本，不受環保規費波動影響。</p>
+                </div>
+                <div class="card-custom" data-aos="fade-up" data-aos-delay="200">
+                    <h3 class="text-xl font-bold text-[#1a5f3a] mb-4">數位面｜合規數據賦能</h3>
+                    <p class="text-gray-500 text-sm">專屬 ESG 數位監測平台，一鍵匯出標準報告素材，解決永續報告編撰痛點。</p>
+                </div>
+                <div class="card-custom" data-aos="fade-up" data-aos-delay="300">
+                    <h3 class="text-xl font-bold text-[#1a5f3a] mb-4">形象面｜品牌與員工體驗</h3>
+                    <p class="text-gray-500 text-sm">從餐桌到餐桌員工體驗、有機品回饋，建立由內而外的永續標竿形象。</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- 聯絡我們 + 表單 -->
-<section class="contact" id="contact">
-  <div class="container">
-    <h2 class="section-title">聯絡我們</h2>
-    <div class="contact-form">
-      <form action="javascript:alert('表單送出成功！')">
-        <div class="form-group"><label>公司名稱</label><input type="text" required></div>
-        <div class="form-group"><label>聯絡人</label><input type="text" required></div>
-        <div class="form-group"><label>電子郵件</label><input type="email" required></div>
-        <div class="form-group"><label>需求說明</label><textarea placeholder="廚餘處理、ESG顧問、合作諮詢..."></textarea></div>
-        <button type="submit" class="submit-btn">送出諮詢</button>
-      </form>
-    </div>
-    <div class="contact-info">
-      <p>網站：www.sustainableyulin.com</p>
-      <p>信箱：contact@sustainableyulin.com</p>
-      <p style="margin-top:1.5rem">第五組｜鄭喜友、孫凌龍、張仲成、李霈雯、蔡依庭、黃瑋倫、游麗君、曹智鈞</p>
-    </div>
-  </div>
-</section>
+    <!-- 護城河優勢 -->
+    <section class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center section-title mb-16" data-aos="fade-up">四大護城河．高行業門檻</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center p-6" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="text-4xl text-[#8cc63f] mb-4"><i class="fas fa-vial"></i></div>
+                    <h4 class="font-bold text-[#1a5f3a] mb-2 text-sm">核心生物技術</h4>
+                    <p class="text-[11px] text-gray-400">穩定黑水虻育種、全自動養殖設備</p>
+                </div>
+                <div class="text-center p-6" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="text-4xl text-[#8cc63f] mb-4"><i class="fas fa-database"></i></div>
+                    <h4 class="font-bold text-[#1a5f3a] mb-2 text-sm">數位數據合規</h4>
+                    <p class="text-[11px] text-gray-400">ISO 50001 團隊、IoT 碳足跡追蹤</p>
+                </div>
+                <div class="text-center p-6" data-aos="zoom-in" data-aos-delay="300">
+                    <div class="text-4xl text-[#8cc63f] mb-4"><i class="fas fa-shield-halved"></i></div>
+                    <h4 class="font-bold text-[#1a5f3a] mb-2 text-sm">特許營運門檻</h4>
+                    <p class="text-[11px] text-gray-400">合法清除許可、專屬減碳計算方法</p>
+                </div>
+                <div class="text-center p-6" data-aos="zoom-in" data-aos-delay="400">
+                    <div class="text-4xl text-[#8cc63f] mb-4"><i class="fas fa-star"></i></div>
+                    <h4 class="font-bold text-[#1a5f3a] mb-2 text-sm">品牌信譽資產</h4>
+                    <p class="text-[11px] text-gray-400">官方背書、實體回饋、高客戶黏著</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<!-- 頁腳 -->
-<footer>
-  <div class="container">
-    <p>&copy; 2026 永續羽林 Sustainable Yulin. 生物循環經濟解方．保留所有權利。</p>
-  </div>
-</footer>
+    <!-- 願景 -->
+    <section class="py-24 bg-emerald-900 text-white">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-10" data-aos="fade-up">成為台灣企業 ESG 轉型的永續羽翼</h2>
+            <div class="space-y-8 text-emerald-100" data-aos="fade-up" data-aos-delay="200">
+                <p><strong>近期目標：</strong>鎖定核心高產值工業區建立零廢棄標竿，快速複製成功模式。</p>
+                <p><strong>長期願景：</strong>整合顧問聯盟、推動綠色金融與數據授權，成為最具公信力的永續基石。</p>
+            </div>
+            <p class="mt-12 font-bold text-[#8cc63f] text-xl italic" data-aos="fade-up">讓我們一起羽化資源，守護綠意</p>
+        </div>
+    </section>
 
-<script>
-// 手機選單切換
-function toggleMenu(){document.getElementById('navLinks').classList.toggle('active')}
-// 滾動收合選單
-window.addEventListener('scroll',function(){
-  if(window.innerWidth<=768){document.getElementById('navLinks').classList.remove('active')}
-})
-</script>
+    <!-- 聯絡我們 -->
+    <section id="contact" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div data-aos="fade-right">
+                    <h2 class="text-4xl font-bold text-[#1a5f3a] mb-6">聯絡我們</h2>
+                    <p class="text-gray-500 mb-8">
+                        準備好啟動您的綠色轉型了嗎？<br>
+                        SustainFeather 專業團隊將為您量身打造最佳方案。
+                    </p>
+                    <div class="space-y-4 text-sm font-medium">
+                        <p><i class="fas fa-globe text-[#8cc63f] mr-2"></i> www.SustainFeather.com</p>
+                        <p><i class="fas fa-envelope text-[#8cc63f] mr-2"></i> contact@SustainFeather.com</p>
+                    </div>
+                </div>
+                <div class="bg-slate-50 p-10 rounded-3xl shadow-xl shadow-slate-100" data-aos="fade-left">
+                    <form onsubmit="event.preventDefault(); alert('表單送出成功！SustainFeather 團隊將儘速聯繫您。');">
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <input type="text" placeholder="公司名稱" required class="w-full px-5 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#8cc63f] outline-none transition">
+                            <input type="text" placeholder="聯絡人" required class="w-full px-5 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#8cc63f] outline-none transition">
+                        </div>
+                        <input type="email" placeholder="電子郵件" required class="w-full px-5 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#8cc63f] outline-none transition mb-4">
+                        <textarea placeholder="需求說明（如：廚餘處理、ESG顧問、合作諮詢...）" rows="4" class="w-full px-5 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-[#8cc63f] outline-none transition mb-4"></textarea>
+                        <button class="w-full bg-[#1a5f3a] text-white font-bold py-4 rounded-xl hover:bg-[#0f3b24] shadow-lg transition transform hover:-translate-y-1">送出諮詢</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 頁腳與成員名單 -->
+    <footer class="py-12 bg-slate-900 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-10">
+                <div class="flex items-center space-x-2 mb-4 md:mb-0">
+                    <i class="fas fa-leaf text-[#8cc63f]"></i>
+                    <span class="text-xl font-bold">SustainFeather 永續羽林</span>
+                </div>
+                <div class="text-slate-400 text-xs">生物循環經濟解方．羽化資源，守護綠意</div>
+            </div>
+            
+            <div class="border-t border-slate-800 pt-8 text-center">
+                <!-- 成員名單單行呈現 -->
+                <p class="text-slate-400 text-sm font-medium tracking-wide">
+                    第五組｜鄭喜友、孫凌龍、張仲成、李霈雯、蔡依庭、黃瑋倫、游麗君、曹智鈞
+                </p>
+                <p class="text-slate-600 text-[10px] mt-6 uppercase tracking-widest">
+                    &copy; 2026 SustainFeather. All Rights Reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true, offset: 100 });
+        
+        // 手機導航背景捲動效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+            } else {
+                nav.classList.remove('shadow-md');
+            }
+        });
+    </script>
 </body>
 </html>
